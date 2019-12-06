@@ -1,0 +1,69 @@
+{% extends "template.html" %}
+{% load static %}
+{% block content %}
+<div class="container boxBook">
+  <div class="container">
+    <div class="text-white " style="max-width: 900px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{{ book.image.url }}" class="img-fluid" width="500px;" alt="...">       
+        </div>
+        <div class="col-md-8">
+          <div class="card-body ">
+            <h5 class="card-title badge badge-pill badge-primary">{{book.nameBook}}</h5>
+            <p class="card-text"><a href = "{% url 'by_author' book.author.pk %}"> {{book.author.name_author}}</a></p>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Харакактеристики
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <p class="dropdown-item">Жанр: {{book.genre.genre}}</p>
+                  <p class="dropdown-item">Издательство: {{book.publishingHouse}}</p>
+                  <p class="dropdown-item">Дата издадельства: {{book.published}}</p>
+                  <p class="dropdown-item">Язык: {{book.language}}</p>
+                  <p class="dropdown-item">Страниц: {{book.pages}}</p>
+                </div>
+              </div> 
+            <p class="card-text">{{book.description}}</p>
+            <p class="card-text badge badge-pill badge-success">Цена: {{book.price}} ₴</p>
+            <form action="{% url 'cart_add' book.id %}" method="post">
+              {{ cart_book_form}}
+              {% csrf_token %}
+              <input class="btn btn-primary" type="submit" value="Добавить в корзину">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img src="{% static '/media/полка.png' %}" class="img-fluid" width="1300px" height="10px" alt="...">   
+  <div class="container  text-white">
+    <h2 align = 'center'>Предпросмотр</h2>
+    
+    {% if page %}
+    <div class="row justify-content-md-center ">
+      <object><embed src="{{ page.pageBook.url }}" width="1000" height="500" /></object>
+    </div>
+    {% else %}
+    <div class="row justify-content-md-center ">
+      <img src="{% static '/media/No.png' %}" class="img-fluid" width="500px;" alt="...">
+    </div>
+    {%endif%}
+  </div>
+  <img src="{% static '/media/полка.png' %}" class="img-fluid" width="1200px" height="10px" alt="...">  
+  <div class="container text-white ">
+    {% include "coments.html"%}
+  </div>
+  <img src="{% static '/media/полка.png' %}" class="img-fluid" width="1200px" height="10px" alt="...">  
+</div>
+
+
+{% endblock %}
+<p class="card-text">Жанр: {{book.genre.genre}}</p>
+<p class="card-text">Издательство: {{book.publishingHouse}}</p>
+<p class="card-text">Дата издадельства: {{book.published}}</p>
+<p class="card-text">Язык: {{book.language}}</p>
+<p class="card-text">Страниц: {{book.pages}}</p>
+<p class="card-text">Описание</p>
+<p class="card-text">{{book.description}}</p>
+class="d-block w-100" style="width: 100% \9; height: 900px;"

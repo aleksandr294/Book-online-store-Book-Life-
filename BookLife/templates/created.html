@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="card text-white bg-dark mb-3" style="max-width: 600px;">
+            <h1 align = 'center'>Спасибо что выбрали наш интернет - магазин</h1>
+            <p align = 'center'>Ваш заказ был успешно оформлен. Номер вашего заказа 
+                <strong>{{ order.id }}</strong>.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

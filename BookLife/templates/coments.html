@@ -1,0 +1,28 @@
+{% block content %}
+{% with comments.count as total_comments %}
+    <h2>
+        {{ total_comments }} comment{{ total_comments|pluralize }}
+    </h2>
+{% endwith %}
+{% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            Комментарий {{ forloop.counter }} by {{ comment.name }}
+            {{ comment.created }}
+        </p>
+        {{ comment.body|linebreaks }}
+    </div>
+{% empty %}
+    <p>Пока комментариев нет.</p>
+{% endfor %}
+{% if new_comment %}
+    <h2>Your comment has been added.</h2>
+{% else %}
+    <h2>Добавить новый комментарий</h2>
+    <form class="form-group" action="." method="post">
+        {{ comment_form.as_p  }}
+        {% csrf_token %}
+        <p><input class="btn btn-primary" type="submit" value="Добавить комментарий"></p>
+    </form>
+{% endif %}
+{% endblock %}

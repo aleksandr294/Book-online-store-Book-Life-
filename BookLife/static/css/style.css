@@ -1,0 +1,22 @@
+body{
+    background-image: url("content.png");
+}
+
+.boxBook{
+    background-image: url("body.jpg");
+}
+.price{
+    color: green;
+    font-style: italic;
+    font-weight: 600;
+}
+.title{
+    color: rgb(172, 23, 122);
+}
+.author{
+    color: #343A40;
+}
+.badge-pill{
+    padding: 5px;
+    font-size: 14px;
+}

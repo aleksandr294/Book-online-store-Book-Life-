@@ -1,0 +1,27 @@
+{% block content %}
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+    {% if books.has_previous %}
+      <li class="page-item ">
+        <a class="page-link text-white bg-dark " href="?page={{ books.previous_page_number }}" >Назад</a>
+      </li>
+    {% endif %}
+    {% for pg in page_range %}
+        {% if blogs.number == pg %}
+        <li class="page-item"><a class="page-link text-white bg-dark" href="?page={{ pg }}">{{ pg }}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link text-white bg-dark" href="?page={{ pg }}">{{ pg }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if books.has_next %}
+      <li class="page-item">
+        <a class="page-link text-white bg-dark" href="?page={{ books.next_page_number }}">Вперед</a>
+      </li>
+    {% endif %}
+    </ul>
+  </nav>
+
+
+
+
+{% endblock %}

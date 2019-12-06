@@ -1,0 +1,68 @@
+{% extends "template.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="card mb-3 text-white bg-dark mb-3" style="max-width: 900px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{ current_author.photo.url }}" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ current_author.name_author }}</h5>
+          <p class="card-text">Дата рождения: {{ current_author.dateOfBirth }}</p>
+          <p class="card-text">
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Биография</a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Дебют</a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample3">Реакция</a>
+          </p>
+
+          <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body bg-dark mb-3">
+              {{ current_author.biography }}
+            </div>
+          </div>
+
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+              <div class="card card-body bg-dark mb-3">
+                {{ current_author.debut }}
+              </div>
+            </div>
+
+            <div class="collapse multi-collapse" id="multiCollapseExample3">
+                <div class="card card-body bg-dark mb-3">
+                  {{ current_author.reaction }}
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+        <div class="row">
+          {% for book in books %}
+          <div class="col-lg-5">
+          <div class="card text-white bg-dark" style="max-width: 540px;">
+              <div class="row no-gutters">
+                <div class="col-md-4">
+                  <img src="{{ book.image.url }}" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"><a href = "{% url 'book' book.nameBook %}"> {{book.nameBook}} </a></h5>
+                    <p class="card-text"><a href = "{% url 'by_author' book.author.pk %}"> {{book.author.name_author}}</a></p>
+                    <p class="card-text"> {{book.genre.genre}} </p>
+                    <p class="card-text badge badge-pill badge-success">{{book.price}} ₴</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <img src="{% static '/media/courier-1.png' %}" class="align-self-start mr-3" alt="...">
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+{% endblock %}

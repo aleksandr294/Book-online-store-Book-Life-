@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% load static %}
+{% block content %}
+<div class="container text-white bg-dark mb-3">
+    <div class="order-info">
+        <h3>Ваш Заказ</h3>
+        <ul class="list-group ">
+            {% for item in cart %}
+            <li class="text-white bg-dark mb-3 list-group-item d-flex justify-content-between align-items-center">
+                {{ item.quantity }}x {{ item.book.nameBook }}
+                <span class="badge badge-pill badge-success">{{ item.total_price }}₴</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <h5>Итого: {{ cart.get_total_price }}₴</h5>
+    </div>
+    <form action="." method="post">
+        <div class="form-group">
+        {{ form.as_p }}
+        <p><input type="submit" value="Оформить заказ" class="btn btn-primary"></p>
+        {% csrf_token %}
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

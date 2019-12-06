@@ -1,0 +1,8 @@
+{% block content %}
+<p class="price">${{ book.price }}</p>
+<form action="{% url 'cart_add' book.id %}" method="post">
+    {{ cart_book_form}}
+    {% csrf_token %}
+    <input type="submit" value="Add to cart">
+</form>
+{% endblock %}
